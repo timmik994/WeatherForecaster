@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhetherForecaster", "WhetherForecaster\WhetherForecaster.csproj", "{BEED5785-F48D-40E5-BA0A-757685497F6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhetherForecasterTest", "WhetherForecasterTest\WhetherForecasterTest.csproj", "{AF54F4AF-2154-45A1-96FD-2B2679AE2B55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEED5785-F48D-40E5-BA0A-757685497F6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEED5785-F48D-40E5-BA0A-757685497F6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEED5785-F48D-40E5-BA0A-757685497F6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEED5785-F48D-40E5-BA0A-757685497F6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF54F4AF-2154-45A1-96FD-2B2679AE2B55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF54F4AF-2154-45A1-96FD-2B2679AE2B55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF54F4AF-2154-45A1-96FD-2B2679AE2B55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF54F4AF-2154-45A1-96FD-2B2679AE2B55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D1FA1BC-2910-4B93-A79D-3BEEB2316E41}
+	EndGlobalSection
+EndGlobal
