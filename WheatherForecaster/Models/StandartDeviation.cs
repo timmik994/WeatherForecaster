@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace WheatherForecaster.Models
+﻿namespace WheatherForecaster.Models
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
     /// <summary>
     /// Standard deviation for weather forecast.
     /// </summary>

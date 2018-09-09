@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace WheatherForecaster.Services
+﻿namespace WheatherForecaster.Services
 {
     /// <summary>
     /// Urls to weather API.

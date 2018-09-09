@@ -1,9 +1,8 @@
-﻿using WheatherForecaster.Models.WheatherApiModels;
-
-namespace WhetherForecaster.Models
+﻿namespace WheatherForecaster.Models
 {
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
+    using WheatherForecaster.Models.WheatherApiModels;
 
     /// <summary>
     /// Whether record from API.

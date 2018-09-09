@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using WheatherForecaster.Models.WheatherApiModels;
-
-namespace WheatherForecaster.Models
+﻿namespace WheatherForecaster.Models
 {
+    using Newtonsoft.Json;
+    using WheatherForecaster.Models.WheatherApiModels;
+
     /// <summary>
     /// Current whether API response.
     /// </summary>

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using WheatherForecaster.Models;
-
-namespace WhetherForecaster.Services
+﻿namespace WheatherForecaster.Services
 {
+    using System.Collections.Generic;
+    using WheatherForecaster.Models;
+
     /// <summary>
     /// Service to calculate standard deviation for whether.
     /// </summary>
@@ -11,7 +11,6 @@ namespace WhetherForecaster.Services
         /// <summary>
         /// Gets standard deviation for whether forecasts.
         /// </summary>
-        /// <param name="hours">Hours forecast forward/param>
         /// <returns>List of standard deviation.</returns>
         IEnumerable<StandartDeviation> GetDeviation();
     }

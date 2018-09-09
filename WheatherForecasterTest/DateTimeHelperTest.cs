@@ -1,12 +1,17 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-using WheatherForecaster.Services;
-using Xunit;
-
-namespace WhetherForecasterTest
+namespace WheatherForecasterTest
 {
+    using System;
+    using WheatherForecaster.Services;
+    using Xunit;
+
+    /// <summary>
+    /// Tests for DateTimeHelper.
+    /// </summary>
     public class DateTimeHelperTest
     {
+        /// <summary>
+        /// Tests calculation of delta between to dates in hours.
+        /// </summary>
         [Fact]
         public void GetDateDeltaInHoursTest()
         {
@@ -21,6 +26,11 @@ namespace WhetherForecasterTest
             Assert.Equal(expectedDelta, delta);
         }
 
+        /// <summary>
+        /// Tests that returns right forecast time.
+        /// </summary>
+        /// <param name="delta">Delta between actual and forecast times.</param>
+        /// <param name="expected">Expected value.</param>
         [Theory]
         [InlineData(4, 3)]
         [InlineData(6, 6)]

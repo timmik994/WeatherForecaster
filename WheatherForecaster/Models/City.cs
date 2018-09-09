@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace WhetherForecaster.Models
+﻿namespace WheatherForecaster.Models
 {
+    /// <summary>
+    /// City when forecast done.
+    /// </summary>
     public class City
     {
         /// <summary>

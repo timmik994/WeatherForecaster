@@ -32,7 +32,7 @@ function DrawChart() {
 // loads a data from API.
 function LoadData() {
     $.ajax({
-        url: "GetForecastAsync",
+        url: "/Wheather/GetForecastAsync",
         success: function (data) {
             weatherData = data;
             google.charts.load('current', { 'packages': ['corechart'] });

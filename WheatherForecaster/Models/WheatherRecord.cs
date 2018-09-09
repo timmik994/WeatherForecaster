@@ -1,4 +1,4 @@
-﻿namespace WhetherForecaster.Models
+﻿namespace WheatherForecaster.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;

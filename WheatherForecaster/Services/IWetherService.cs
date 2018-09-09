@@ -1,9 +1,7 @@
-﻿using WheatherForecaster.Models;
-
-namespace WhetherForecaster.Services
+﻿namespace WheatherForecaster.Services
 {
     using System.Threading.Tasks;
-    using WhetherForecaster.Models;
+    using WheatherForecaster.Models;
 
     /// <summary>
     /// Client to whether API.

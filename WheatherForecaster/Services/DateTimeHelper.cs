@@ -20,19 +20,19 @@
         /// <summary>
         /// Zero point when UNIX starts calculate time.
         /// </summary>
-        private static DateTime UnitZeroPoint = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        private static DateTime unixZeroPoint = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
         /// <summary>
         /// Gets delta in hours of firstUtcDate and secondUtcDate.
         /// </summary>
-        /// <param name="firstUtcDate">Date in UTC format.</param>
-        /// <param name="secondUtcDate">Date in UTC format.</param>
+        /// <param name="fromUtcDate">Date from in UTC format.</param>
+        /// <param name="toUtcDate">Date to in UTC format.</param>
         /// <returns>Delta between dates in hours.</returns>
         public static int GetDateDeltaInHours(DateTime fromUtcDate, DateTime toUtcDate)
         {
             long secondsDelta = toUtcDate.ToFileTime() - fromUtcDate.ToFileTime();
-            float hoursDelta = (float) secondsDelta / (float) DateTimeHelper.SecondsInHour;
-            int trunkedDelta = (int) MathF.Round(hoursDelta);
+            float hoursDelta = (float)secondsDelta / (float)DateTimeHelper.SecondsInHour;
+            int trunkedDelta = (int)MathF.Round(hoursDelta);
             return trunkedDelta;
         }
 
@@ -60,11 +60,11 @@
         /// <summary>
         /// Converts UNIX time stamp to DateTime.
         /// </summary>
-        /// <param name="UnixTimeStamp">UNIX time stamp</param>
+        /// <param name="unixTimeStamp">UNIX time stamp</param>
         /// <returns>Actual dateTime.</returns>
         public static DateTime FromUnixUTCTime(long unixTimeStamp)
         {
-            DateTime result = DateTimeHelper.UnitZeroPoint.AddSeconds(unixTimeStamp).ToLocalTime();
+            DateTime result = DateTimeHelper.unixZeroPoint.AddSeconds(unixTimeStamp).ToLocalTime();
             return result;
         }
     }

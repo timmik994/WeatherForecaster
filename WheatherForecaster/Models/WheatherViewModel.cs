@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace WheatherForecaster.Models
+﻿namespace WheatherForecaster.Models
 {
+    using System;
+
     /// <summary>
     /// Data model of weather forecast to return from service.
     /// </summary>

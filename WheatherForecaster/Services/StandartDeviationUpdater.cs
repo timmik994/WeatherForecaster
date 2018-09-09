@@ -1,12 +1,10 @@
-﻿
-namespace WheatherForecaster.Services
+﻿namespace WheatherForecaster.Services
 {
     using System;
     using System.Linq;
     using System.Threading;
     using Microsoft.Extensions.DependencyInjection;
     using WheatherForecaster.Models;
-    using WhetherForecaster.Models;
 
     /// <summary>
     /// Updater to update standard deviations.
@@ -41,16 +39,16 @@ namespace WheatherForecaster.Services
         /// <summary>
         /// Context to connect database.
         /// </summary>
-        private WheatherDbContext dbContext;
+        private WeatherDbContext dbContext;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="StandartDeviationUpdater"/> class.
+        /// Initializes a new instance of the<see cref="StandartDeviationUpdater"/> class.
         /// </summary>
-        /// <param name="serviceProvider"></param>
+        /// <param name="serviceProvider">Provider of services.</param>
         public StandartDeviationUpdater(IServiceProvider serviceProvider)
         {
             IServiceScope scope = serviceProvider.CreateScope();
-            this.dbContext = (WheatherDbContext) scope.ServiceProvider.GetService(typeof(WheatherDbContext));
+            this.dbContext = (WeatherDbContext)scope.ServiceProvider.GetService(typeof(WeatherDbContext));
         }
 
         /// <summary>
@@ -64,7 +62,7 @@ namespace WheatherForecaster.Services
                     i <= StandartDeviationUpdater.ForecastMaxHoursForward;
                     i += StandartDeviationUpdater.ForecastStep)
                 {
-                    CalculateDeviation(i);
+                    this.CalculateDeviation(i);
                 }
 
                 Thread.Sleep(StandartDeviationUpdater.DeviationUpdateInterval);
@@ -74,11 +72,11 @@ namespace WheatherForecaster.Services
         /// <summary>
         /// Calculates standard deviation.
         /// </summary>
-        /// <param name="hoursFowward"></param>
+        /// <param name="hoursFowward">Delta between forecast was done and forecast time.</param>
         private void CalculateDeviation(int hoursFowward)
         {
             StandartDeviation deviation = 
-                dbContext.Deviations.FirstOrDefault(d => d.HoursForward == hoursFowward);
+                this.dbContext.Deviations.FirstOrDefault(d => d.HoursForward == hoursFowward);
             if (deviation == null)
             {
                 deviation = new StandartDeviation()
@@ -86,11 +84,11 @@ namespace WheatherForecaster.Services
                     HoursForward = hoursFowward,
                     Deviation = StandartDeviationUpdater.DefaultStandartDeviation
                 };
-                dbContext.Deviations.Add(deviation);
+                this.dbContext.Deviations.Add(deviation);
             }
 
             IQueryable<WheatherRecord> wheatherRecords =
-                dbContext.WhetherRecords.Where(wr => wr.IsFull && wr.ForecastHours == hoursFowward);
+                this.dbContext.WhetherRecords.Where(wr => wr.IsFull && wr.ForecastHours == hoursFowward);
             if (wheatherRecords.Count() > 0)
             {
                 deviation.Deviation =
@@ -99,7 +97,7 @@ namespace WheatherForecaster.Services
             }
 
             deviation.CalculationTime = DateTime.Now;
-            dbContext.SaveChanges();
+            this.dbContext.SaveChanges();
         }
     }
 }

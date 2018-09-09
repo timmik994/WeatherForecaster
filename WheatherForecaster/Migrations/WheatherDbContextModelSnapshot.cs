@@ -3,12 +3,11 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WhetherForecaster.Models;
+using WheatherForecaster.Models;
 
 namespace WheatherForecaster.Migrations
 {
-    [DbContext(typeof(WheatherDbContext))]
+    [DbContext(typeof(WeatherDbContext))]
     partial class WheatherDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

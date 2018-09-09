@@ -7,8 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
     using WheatherForecaster.Models;
     using WheatherForecaster.Services;
-    using WhetherForecaster.Models;
-    using WhetherForecaster.Services;
+
 
     /// <summary>
     /// Controller to work with weatherData.
@@ -26,7 +25,7 @@
         private IStandartDeviationService standartDeviationService;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="WheatherController"/> class.
+        /// Initializes a new instance of the <see cref="WheatherController"/> class.
         /// </summary>
         /// <param name="wheatherService">Service to connect weather API.</param>
         /// <param name="deviationService">Service to get standard deviation.</param>
@@ -42,7 +41,7 @@
         /// <returns>Action result.</returns>
         public IActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         /// <summary>
@@ -51,8 +50,8 @@
         /// <returns>Action result.</returns>
         public async Task<IActionResult> GetForecastAsync()
         {
-            WheatherApiListRecord wheatherForecast =await wheatherService.GetForecastAsync();
-            IEnumerable<StandartDeviation> deviations = standartDeviationService.GetDeviation();
+            WheatherApiListRecord wheatherForecast = await this.wheatherService.GetForecastAsync();
+            IEnumerable<StandartDeviation> deviations = this.standartDeviationService.GetDeviation();
             IEnumerable<WheatherViewModel> viewModels = wheatherForecast.WhetherData.Select(wd =>
             {
                 int forwardTime = this.GetForecastForwardHours(wd.UtcDateTime);
@@ -72,7 +71,7 @@
                 return viewModel;
             });
 
-            return Json(viewModels);
+            return this.Json(viewModels);
         }
 
         /// <summary>
@@ -82,7 +81,7 @@
         /// <returns>Delta in hours.</returns>
         private int GetForecastForwardHours(long forecastUnixTime)
         {
-            DateTime forecastForwardTime= DateTimeHelper.FromUnixUTCTime(forecastUnixTime);
+            DateTime forecastForwardTime = DateTimeHelper.FromUnixUTCTime(forecastUnixTime);
             int delta = DateTimeHelper.GetDateDeltaInHours(DateTime.Now.ToUniversalTime(), forecastForwardTime);
             int forecastForwardHours = DateTimeHelper.GetForecastHours(delta);
             return forecastForwardHours;

@@ -4,12 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WhetherForecaster.Models;
+using WheatherForecaster.Models;
 
 namespace WheatherForecaster.Migrations
 {
-    [DbContext(typeof(WheatherDbContext))]
+    [DbContext(typeof(WeatherDbContext))]
     [Migration("20180909161519_Initial")]
     partial class Initial
     {

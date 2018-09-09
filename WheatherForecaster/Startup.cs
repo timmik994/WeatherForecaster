@@ -2,15 +2,13 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using WheatherForecaster.Services;
-    using WhetherForecaster.Models;
-    using WhetherForecaster.Services;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using WheatherForecaster.Models;
+    using WheatherForecaster.Services;
 
     /// <summary>
     /// Startup class.
@@ -23,7 +21,7 @@
         private const string ConnectionStringName = "DefaultConnection";
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Startup"/> class.
+        /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
         /// <param name="configuration">Configuration object.</param>
         public Startup(IConfiguration configuration)
@@ -44,7 +42,8 @@
         public void ConfigureServices(IServiceCollection services)
         {
             string connectionString = this.Configuration.GetConnectionString(Startup.ConnectionStringName);
-            services.AddDbContext<WheatherDbContext>(options =>
+            services.AddDbContext<WeatherDbContext>(
+                options =>
                     options.UseSqlServer(connectionString),
                     ServiceLifetime.Transient);
             services.AddSingleton<WheatherSaverService>();
@@ -59,6 +58,7 @@
         /// </summary>
         /// <param name="app">Application builder.</param>
         /// <param name="env">Environment variable.</param>
+        /// <param name="provider">Provider of services.</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider provider)
         {
             if (env.IsDevelopment())
@@ -67,22 +67,26 @@
             }
 
             app.UseStaticFiles();
-            RunDeamonProcesses(provider);
+            this.RunDeamonProcesses(provider);
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Wheather}/{action=Index}/{id?}");
             });
         }
 
-        private void RunDeamonProcesses(IServiceProvider services)
+        /// <summary>
+        /// Runs demon processes.
+        /// </summary>
+        /// <param name="serviceProvider">Provides of registered services.</param>
+        private void RunDeamonProcesses(IServiceProvider serviceProvider)
         {
             StandartDeviationUpdater updater =
-                (StandartDeviationUpdater)services.GetService(typeof(StandartDeviationUpdater));
+                (StandartDeviationUpdater)serviceProvider.GetService(typeof(StandartDeviationUpdater));
             Task.Run(() => updater.UpdateDeviation());
             WheatherSaverService saver =
-                (WheatherSaverService)services.GetService(typeof(WheatherSaverService));
+                (WheatherSaverService)serviceProvider.GetService(typeof(WheatherSaverService));
             Task.Run(async () => await saver.SaveWheatherData());
         }
     }
