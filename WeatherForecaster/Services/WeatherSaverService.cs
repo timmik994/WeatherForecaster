@@ -62,13 +62,13 @@
         /// <returns>The <see cref="Task"/>.</returns>
         private async Task SaveNewForecasts()
         {
-            WheatherApiListRecord wheather = await this.wheatherService.GetForecastAsync();
-            IEnumerable<WheatherRecord> wheatherRecords = wheather.WhetherData.Select(wd =>
+            WeatherApiListRecord wheather = await this.wheatherService.GetForecastAsync();
+            IEnumerable<WeatherRecord> wheatherRecords = wheather.WhetherData.Select(wd =>
             {
                 DateTime forecastTime = DateTimeHelper.FromUnixUTCTime(wd.UtcDateTime);
                 int forecastNowTimeDelta =
                     DateTimeHelper.GetDateDeltaInHours(DateTime.Now, forecastTime);
-                var record = new WheatherRecord()
+                var record = new WeatherRecord()
                 {
                     ForecastTime = forecastTime,
                     IsFull = false,
@@ -87,9 +87,9 @@
         /// <returns>The <see cref="Task"/>.</returns>
         private async Task UpdateActualWheatherData()
         {
-            CurrentWheather wheather = await this.wheatherService.GetCurrentWhetherAsync();
+            CurrentWeather wheather = await this.wheatherService.GetCurrentWhetherAsync();
             DateTime wheatherTime = DateTimeHelper.FromUnixUTCTime(wheather.DateTime);
-            IQueryable<WheatherRecord> recordsToUpdate = this.dbContext.WhetherRecords.Where(wr =>
+            IQueryable<WeatherRecord> recordsToUpdate = this.dbContext.WhetherRecords.Where(wr =>
                 DateTimeHelper.GetDateDeltaInHours(wr.ForecastTime, wheatherTime) == 1);
             foreach (var record in recordsToUpdate)
             {

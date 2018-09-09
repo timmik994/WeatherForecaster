@@ -87,7 +87,7 @@
                 this.dbContext.Deviations.Add(deviation);
             }
 
-            IQueryable<WheatherRecord> wheatherRecords =
+            IQueryable<WeatherRecord> wheatherRecords =
                 this.dbContext.WhetherRecords.Where(wr => wr.IsFull && wr.ForecastHours == hoursFowward);
             if (wheatherRecords.Count() > 0)
             {

@@ -5,7 +5,7 @@
     /// <summary>
     /// Data model of weather forecast to return from service.
     /// </summary>
-    public class WheatherViewModel
+    public class WeatherViewModel
     {
         /// <summary>
         /// Gets or sets max temperature using standard deviation.

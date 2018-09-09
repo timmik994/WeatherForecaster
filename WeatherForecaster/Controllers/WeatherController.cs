@@ -12,7 +12,7 @@
     /// <summary>
     /// Controller to work with weatherData.
     /// </summary>
-    public class WheatherController : Controller
+    public class WeatherController : Controller
     {
         /// <summary>
         /// Service to get weather data.
@@ -25,11 +25,11 @@
         private IStandartDeviationService standartDeviationService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WheatherController"/> class.
+        /// Initializes a new instance of the <see cref="WeatherController"/> class.
         /// </summary>
         /// <param name="wheatherService">Service to connect weather API.</param>
         /// <param name="deviationService">Service to get standard deviation.</param>
-        public WheatherController(IWeatherService wheatherService, IStandartDeviationService deviationService)
+        public WeatherController(IWeatherService wheatherService, IStandartDeviationService deviationService)
         {
             this.wheatherService = wheatherService;
             this.standartDeviationService = deviationService;
@@ -50,9 +50,9 @@
         /// <returns>Action result.</returns>
         public async Task<IActionResult> GetForecastAsync()
         {
-            WheatherApiListRecord wheatherForecast = await this.wheatherService.GetForecastAsync();
+            WeatherApiListRecord wheatherForecast = await this.wheatherService.GetForecastAsync();
             IEnumerable<StandartDeviation> deviations = this.standartDeviationService.GetDeviation();
-            IEnumerable<WheatherViewModel> viewModels = wheatherForecast.WhetherData.Select(wd =>
+            IEnumerable<WeatherViewModel> viewModels = wheatherForecast.WhetherData.Select(wd =>
             {
                 int forwardTime = this.GetForecastForwardHours(wd.UtcDateTime);
                 float deviation = 0;
@@ -61,7 +61,7 @@
                     deviation = deviations.FirstOrDefault(d => d.HoursForward == forwardTime).Deviation;
                 }
 
-                WheatherViewModel viewModel = new WheatherViewModel()
+                WeatherViewModel viewModel = new WeatherViewModel()
                 {
                     ForecastTime = DateTimeHelper.FromUnixUTCTime(wd.UtcDateTime),
                     ActualTemperature = wd.Tempreachure.Tempeachure,

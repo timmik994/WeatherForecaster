@@ -6,7 +6,7 @@
     /// <summary>
     /// Whether response from API.
     /// </summary>
-    public class WheatherApiListRecord
+    public class WeatherApiListRecord
     {
         /// <summary>
         /// Gets or sets city where we get forecast.

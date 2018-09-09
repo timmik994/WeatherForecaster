@@ -6,7 +6,7 @@
     /// <summary>
     /// Record of forecast whether and actual whether
     /// </summary>
-    public class WheatherRecord
+    public class WeatherRecord
     {
         /// <summary>
         /// Gets or sets id of record in database.

@@ -8,19 +8,19 @@
     /// <summary>
     /// Service to work with weather API.
     /// </summary>
-    public class WheatherService : IWeatherService
+    public class WeatherService : IWeatherService
     {
         /// <summary>
         /// Get current whether.
         /// </summary>
         /// <returns>>Weather record with actual values.</returns>
-        public async Task<CurrentWheather> GetCurrentWhetherAsync()
+        public async Task<CurrentWeather> GetCurrentWhetherAsync()
         {
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync(WeatherApiUrlConstants.ActualWeather);
                 string wheatherJson = await response.Content.ReadAsStringAsync();
-                CurrentWheather wheatherRecord = JsonConvert.DeserializeObject<CurrentWheather>(wheatherJson);
+                CurrentWeather wheatherRecord = JsonConvert.DeserializeObject<CurrentWeather>(wheatherJson);
                 return wheatherRecord;
             }
         }
@@ -29,13 +29,13 @@
         /// Gets whether forecast.
         /// </summary>
         /// <returns>Weather record with forecasts.</returns>
-        public async Task<WheatherApiListRecord> GetForecastAsync()
+        public async Task<WeatherApiListRecord> GetForecastAsync()
         {
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync(WeatherApiUrlConstants.Forecast);
                 string wheatherJson = await response.Content.ReadAsStringAsync();
-                WheatherApiListRecord wheatherRecord = JsonConvert.DeserializeObject<WheatherApiListRecord>(wheatherJson);
+                WeatherApiListRecord wheatherRecord = JsonConvert.DeserializeObject<WeatherApiListRecord>(wheatherJson);
                 return wheatherRecord;
             }
         }

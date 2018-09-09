@@ -12,12 +12,12 @@
         /// Gets whether forecast.
         /// </summary>
         /// <returns>Weather record with forecasts.</returns>
-        Task<WheatherApiListRecord> GetForecastAsync();
+        Task<WeatherApiListRecord> GetForecastAsync();
 
         /// <summary>
         /// Get current whether.
         /// </summary>
         /// <returns>>Weather record with actual values.</returns>
-        Task<CurrentWheather> GetCurrentWhetherAsync();
+        Task<CurrentWeather> GetCurrentWhetherAsync();
     }
 }

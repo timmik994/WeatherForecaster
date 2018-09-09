@@ -6,7 +6,7 @@
     /// <summary>
     /// Current whether API response.
     /// </summary>
-    public class CurrentWheather
+    public class CurrentWeather
     {
         /// <summary>
         /// Gets or sets time of the forecast.

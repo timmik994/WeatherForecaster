@@ -19,7 +19,7 @@
         /// <summary>
         /// Gets or sets table with whether records.
         /// </summary>
-        public DbSet<WheatherRecord> WhetherRecords { get; set; }
+        public DbSet<WeatherRecord> WhetherRecords { get; set; }
 
         /// <summary>
         /// Gets or sets table with standard deviations.

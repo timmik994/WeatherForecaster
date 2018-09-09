@@ -49,7 +49,7 @@
             services.AddSingleton<WheatherSaverService>();
             services.AddSingleton<StandartDeviationUpdater>();
             services.AddTransient<IStandartDeviationService, StandardDeviationService>();
-            services.AddTransient<IWeatherService, WheatherService>();
+            services.AddTransient<IWeatherService, WeatherService>();
             services.AddMvc();
         }
 
@@ -72,7 +72,7 @@
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Wheather}/{action=Index}/{id?}");
+                    template: "{controller=Weather}/{action=Index}/{id?}");
             });
         }
 
