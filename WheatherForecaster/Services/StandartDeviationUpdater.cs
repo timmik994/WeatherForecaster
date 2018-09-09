@@ -1,32 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using WheatherForecaster.Models;
-using WhetherForecaster.Models;
-
+﻿
 namespace WheatherForecaster.Services
 {
+    using System;
+    using System.Linq;
+    using System.Threading;
+    using Microsoft.Extensions.DependencyInjection;
+    using WheatherForecaster.Models;
+    using WhetherForecaster.Models;
+
+    /// <summary>
+    /// Updater to update standard deviations.
+    /// </summary>
     public class StandartDeviationUpdater
     {
-        private const float DefaultStandartDeviation = 0;
+        /// <summary>
+        /// Default standard deviation value.
+        /// </summary>
+        private const float DefaultStandartDeviation = 3;
 
+        /// <summary>
+        /// Minimum forecast time.
+        /// </summary>
         private const int ForecastMinHoursForward = 3;
 
+        /// <summary>
+        /// Max forecast time.
+        /// </summary>
         private const int ForecastMaxHoursForward = 120;
 
+        /// <summary>
+        /// Time between forecasts.
+        /// </summary>
         private const int ForecastStep = 3;
 
+        /// <summary>
+        /// Interval between updates.
+        /// </summary>
         private const int DeviationUpdateInterval = 86400;
 
+        /// <summary>
+        /// Context to connect database.
+        /// </summary>
         private WheatherDbContext dbContext;
 
-        public StandartDeviationUpdater(WheatherDbContext context)
+        /// <summary>
+        /// Initializes a new instance of <see cref="StandartDeviationUpdater"/> class.
+        /// </summary>
+        /// <param name="serviceProvider"></param>
+        public StandartDeviationUpdater(IServiceProvider serviceProvider)
         {
-            this.dbContext = context;
+            IServiceScope scope = serviceProvider.CreateScope();
+            this.dbContext = (WheatherDbContext) scope.ServiceProvider.GetService(typeof(WheatherDbContext));
         }
 
+        /// <summary>
+        /// Runs deviation update.
+        /// </summary>
         public void UpdateDeviation()
         {
             while (true)
@@ -42,6 +71,10 @@ namespace WheatherForecaster.Services
             }
         }
 
+        /// <summary>
+        /// Calculates standard deviation.
+        /// </summary>
+        /// <param name="hoursFowward"></param>
         private void CalculateDeviation(int hoursFowward)
         {
             StandartDeviation deviation = 
@@ -53,6 +86,7 @@ namespace WheatherForecaster.Services
                     HoursForward = hoursFowward,
                     Deviation = StandartDeviationUpdater.DefaultStandartDeviation
                 };
+                dbContext.Deviations.Add(deviation);
             }
 
             IQueryable<WheatherRecord> wheatherRecords =

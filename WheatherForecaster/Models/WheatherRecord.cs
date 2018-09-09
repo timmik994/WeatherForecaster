@@ -1,6 +1,7 @@
 ﻿namespace WhetherForecaster.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     /// <summary>
     /// Record of forecast whether and actual whether
@@ -10,6 +11,7 @@
         /// <summary>
         /// Gets or sets id of record in database.
         /// </summary>
+        [Key]
         public int Id { get; set; }
 
         /// <summary>

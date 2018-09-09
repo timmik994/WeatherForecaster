@@ -1,17 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using WheatherForecaster.Models;
-using WhetherForecaster.Models;
-using WhetherForecaster.Services;
-
-namespace WheatherForecaster.Services
+﻿namespace WheatherForecaster.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Microsoft.Extensions.DependencyInjection;
+    using WheatherForecaster.Models;
+    using WhetherForecaster.Models;
+    using WhetherForecaster.Services;
+
+    /// <summary>
+    /// Service saves weather data from API.
+    /// </summary>
     public class WheatherSaverService
     {
+        /// <summary>
+        /// Interval between data requests.
+        /// </summary>
         private const int UpdateInterval = 10800;
 
         /// <summary>
@@ -24,13 +30,23 @@ namespace WheatherForecaster.Services
         /// </summary>
         private IWeatherService wheatherService;
 
-
-        public WheatherSaverService(WheatherDbContext context, IWeatherService wheatherService)
+        /// <summary>
+        /// Initializes a new instance of <see cref="WheatherSaverService"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <param name="wheatherService">Weather API client.</param>
+        public WheatherSaverService(IServiceProvider serviceProvider, IWeatherService wheatherService)
         {
-            this.dbContext = context;
+            IServiceScope scope = serviceProvider.CreateScope();
+            this.dbContext = 
+                (WheatherDbContext) scope.ServiceProvider.GetService(typeof(WheatherDbContext));
             this.wheatherService = wheatherService;
         }
 
+        /// <summary>
+        /// Saves weather data to database.
+        /// </summary>
+        /// <returns></returns>
         public async Task SaveWheatherData()
         {
             while (true)
@@ -41,6 +57,10 @@ namespace WheatherForecaster.Services
             }
         }
 
+        /// <summary>
+        /// Gets and saves forecast data in database.
+        /// </summary>
+        /// <returns></returns>
         private async Task SaveNewForecasts()
         {
             WheatherApiListRecord wheather = await wheatherService.GetForecastAsync();
@@ -53,7 +73,7 @@ namespace WheatherForecaster.Services
                 {
                     ForecastTime = forecastTime,
                     IsFull = false,
-                    ForecastTempreche = wd.Tempreachure,
+                    ForecastTempreche = wd.Tempreachure.Tempeachure,
                     ForecastHours = DateTimeHelper.GetForecastHours(forecastNowTimeDelta)
                 };
                 return record;
@@ -62,6 +82,10 @@ namespace WheatherForecaster.Services
             await dbContext.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Sets actual whether data in weather records in database.
+        /// </summary>
+        /// <returns></returns>
         private async Task UpdateActualWheatherData()
         {
             CurrentWheather wheather = await wheatherService.GetCurrentWhetherAsync();
@@ -70,7 +94,7 @@ namespace WheatherForecaster.Services
                 DateTimeHelper.GetDateDeltaInHours(wr.ForecastTime, wheatherTime) == 1);
             foreach (var record in recordsToUpdate)
             {
-                record.ActualTempreche = wheather.Tempreachure;
+                record.ActualTempreche = wheather.Tempreachure.Tempeachure;
                 record.IsFull = true;
             }
 

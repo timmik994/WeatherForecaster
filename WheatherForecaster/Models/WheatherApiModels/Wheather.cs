@@ -1,4 +1,6 @@
-﻿namespace WhetherForecaster.Models
+﻿using WheatherForecaster.Models.WheatherApiModels;
+
+namespace WhetherForecaster.Models
 {
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
@@ -17,7 +19,7 @@
         /// <summary>
         /// Gets or sets temperature in Celsius.
         /// </summary>
-        [JsonProperty("main.temp")]
-        public float Tempreachure { get; set; }
+        [JsonProperty("main")]
+        public TempechureRecord Tempreachure { get; set; }
     }
 }

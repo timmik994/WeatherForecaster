@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace WheatherForecaster.Services
+﻿namespace WheatherForecaster.Services
 {
+    using System;
+
+    /// <summary>
+    /// Helper to work with DateTime.
+    /// </summary>
     public class DateTimeHelper
     {
         /// <summary>

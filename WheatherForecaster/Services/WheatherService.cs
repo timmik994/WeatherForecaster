@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using WheatherForecaster.Models;
-using WheatherForecaster.Services;
-using WhetherForecaster.Models;
-
-namespace WhetherForecaster.Services
+﻿namespace WhetherForecaster.Services
 {
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using WheatherForecaster.Models;
+    using WheatherForecaster.Services;
+    using WhetherForecaster.Models;
+
     /// <summary>
     /// Service to work with weather API.
     /// </summary>

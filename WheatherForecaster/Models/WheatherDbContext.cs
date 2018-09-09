@@ -10,7 +10,7 @@ namespace WhetherForecaster.Models
 {
     public class WheatherDbContext : DbContext
     {
-        public WheatherDbContext(DbContextOptions options) : base(options)
+        public WheatherDbContext(DbContextOptions<WheatherDbContext> options) : base(options)
         {
         }
 
