@@ -17,6 +17,7 @@
         /// <param name="services">Services collection. </param>
         public void ConfigureServices(IServiceCollection services)
         {
+
         }
 
         /// <summary>

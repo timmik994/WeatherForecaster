@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WheatherForecaster.Models;
 using WhetherForecaster.Models;
 
 namespace WhetherForecaster.Services
@@ -14,12 +15,13 @@ namespace WhetherForecaster.Services
 
         public StandardDeviationService(WheatherDbContext context, IWeatherService wheatherService)
         {
-
+            this.dbContext = context;
+            this.wheatherService = wheatherService;
         }
 
-        public float GetDeviation(int hours)
+        public IEnumerable<StandartDeviation> GetDeviation()
         {
-            throw new NotImplementedException();
+            return dbContext.Deviations;
         }
     }
 }
