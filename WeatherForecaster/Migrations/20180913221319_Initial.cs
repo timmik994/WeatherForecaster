@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace WheatherForecaster.Migrations
+namespace WeatherForecaster.Migrations
 {
     public partial class Initial : Migration
     {
@@ -14,7 +14,7 @@ namespace WheatherForecaster.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    HoursForward = table.Column<int>(nullable: false),
+                    ForecastMadeForecastCameTimeDelta = table.Column<int>(nullable: false),
                     Deviation = table.Column<float>(nullable: false),
                     CalculationTime = table.Column<DateTime>(nullable: false)
                 },
@@ -24,20 +24,20 @@ namespace WheatherForecaster.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WhetherRecords",
+                name: "WeatherRecords",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     IsFull = table.Column<bool>(nullable: false),
                     ForecastTime = table.Column<DateTime>(nullable: false),
-                    ForecastTempreche = table.Column<float>(nullable: false),
-                    ForecastHours = table.Column<int>(nullable: false),
-                    ActualTempreche = table.Column<float>(nullable: false)
+                    ForecastTemperature = table.Column<float>(nullable: false),
+                    ForecastMadeForecastCameTimeDelta = table.Column<int>(nullable: false),
+                    ActualTemperature = table.Column<float>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WhetherRecords", x => x.Id);
+                    table.PrimaryKey("PK_WeatherRecords", x => x.Id);
                 });
         }
 
@@ -47,7 +47,7 @@ namespace WheatherForecaster.Migrations
                 name: "Deviations");
 
             migrationBuilder.DropTable(
-                name: "WhetherRecords");
+                name: "WeatherRecords");
         }
     }
 }

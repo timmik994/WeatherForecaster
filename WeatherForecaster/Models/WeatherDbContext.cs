@@ -1,7 +1,6 @@
-﻿namespace WheatherForecaster.Models
+﻿namespace WeatherForecaster.Models
 {
     using Microsoft.EntityFrameworkCore;
-    using WheatherForecaster.Models;
 
     /// <summary>
     /// Database context with weather data.
@@ -17,13 +16,13 @@
         }
 
         /// <summary>
-        /// Gets or sets table with whether records.
+        /// Gets or sets table with weather records.
         /// </summary>
-        public DbSet<WeatherRecord> WhetherRecords { get; set; }
+        public DbSet<WeatherRecord> WeatherRecords { get; set; }
 
         /// <summary>
         /// Gets or sets table with standard deviations.
         /// </summary>
-        public DbSet<StandartDeviation> Deviations { get; set; }
+        public DbSet<StandardDeviation> Deviations { get; set; }
     }
 }

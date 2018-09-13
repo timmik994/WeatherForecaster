@@ -1,23 +1,23 @@
-﻿namespace WheatherForecaster.Models
+﻿namespace WeatherForecaster.Models
 {
     using System.Collections.Generic;
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Whether response from API.
+    /// Weather forecast response from API.
     /// </summary>
-    public class WeatherApiListRecord
+    public class WeatherForecastResponse
     {
         /// <summary>
-        /// Gets or sets city where we get forecast.
+        /// Gets or sets city where forecast was done.
         /// </summary>
         [JsonProperty("city")]
         public City City { get; set; }
 
         /// <summary>
-        /// Gets or sets list of whether records.
+        /// Gets or sets collection of weather records.
         /// </summary>
         [JsonProperty("list")]
-        public IEnumerable<Wheather> WhetherData { get; set; }
+        public IEnumerable<WeatherResponse> WeatherData { get; set; }
     }
 }

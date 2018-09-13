@@ -1,10 +1,10 @@
-﻿namespace WheatherForecaster.Models
+﻿namespace WeatherForecaster.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
 
     /// <summary>
-    /// Record of forecast whether and actual whether
+    /// Record of forecasted weather and real weather
     /// </summary>
     public class WeatherRecord
     {
@@ -15,28 +15,28 @@
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this record has forecast and actual whether.
+        /// Gets or sets a value indicating whether this record has forecasted and real weather.
         /// </summary>
         public bool IsFull { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when forecast was done in UTC format.
+        /// Gets or sets date and time when forecasted weather came.
         /// </summary>
         public DateTime ForecastTime { get; set; }
 
         /// <summary>
-        /// Gets or sets forecast temperature.
+        /// Gets or sets forecasted temperature.
         /// </summary>
-        public float ForecastTempreche { get; set; }
+        public float ForecastTemperature { get; set; }
 
         /// <summary>
-        /// Gets or sets hours forward of forecast.
+        /// Gets or sets delta between time when forecast was made and forecasted weather came.
         /// </summary>
-        public int ForecastHours { get; set; }
+        public int ForecastMadeForecastCameTimeDelta { get; set; }
 
         /// <summary>
         /// Gets or sets Actual temperature
         /// </summary>
-        public float ActualTempreche { get; set; }
+        public float ActualTemperature { get; set; }
     }
 }

@@ -1,17 +1,17 @@
-﻿namespace WheatherForecaster.Services
+﻿namespace WeatherForecaster.Services
 {
     using System.Collections.Generic;
-    using WheatherForecaster.Models;
+    using WeatherForecaster.Models;
 
     /// <summary>
-    /// Service to calculate standard deviation for whether.
+    /// Service to get standard deviation for weather forecasts.
     /// </summary>
-    public interface IStandartDeviationService
+    public interface IStandardDeviationService
     {
         /// <summary>
-        /// Gets standard deviation for whether forecasts.
+        /// Gets standard deviations for weather forecasts.
         /// </summary>
         /// <returns>List of standard deviation.</returns>
-        IEnumerable<StandartDeviation> GetDeviation();
+        IEnumerable<StandardDeviation> GetDeviations();
     }
 }

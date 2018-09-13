@@ -1,7 +1,7 @@
-namespace WheatherForecasterTest
+namespace WeatherForecasterTest
 {
     using System;
-    using WheatherForecaster.Services;
+    using WeatherForecaster.Services;
     using Xunit;
 
     /// <summary>
@@ -20,7 +20,7 @@ namespace WheatherForecasterTest
             DateTime toDate = DateTime.Now.AddHours(expectedDelta);
 
             // act
-            int delta = DateTimeHelper.GetDateDeltaInHours(DateTime.Now, toDate);
+            int delta = DateTimeHelper.GetDeltaInHours(DateTime.Now, toDate);
 
             // assert
             Assert.Equal(expectedDelta, delta);
@@ -38,7 +38,7 @@ namespace WheatherForecasterTest
         public void GetForecastHoursTest(int delta, int expected)
         {
             // act
-            int forecastHours = DateTimeHelper.GetForecastHours(delta);
+            int forecastHours = DateTimeHelper.LeadDeltaToValueDivisibleByStep(delta);
 
             // assert
             Assert.Equal(expected, forecastHours);

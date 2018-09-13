@@ -1,9 +1,9 @@
-﻿namespace WheatherForecaster.Services
+﻿namespace WeatherForecaster.Services
 {
     using System.Net.Http;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
-    using WheatherForecaster.Models;
+    using WeatherForecaster.Models;
 
     /// <summary>
     /// Service to work with weather API.
@@ -11,32 +11,32 @@
     public class WeatherService : IWeatherService
     {
         /// <summary>
-        /// Get current whether.
+        /// Gets current weather.
         /// </summary>
         /// <returns>>Weather record with actual values.</returns>
-        public async Task<CurrentWeather> GetCurrentWhetherAsync()
+        public async Task<WeatherResponse> GetCurrentWeatherAsync()
         {
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync(WeatherApiUrlConstants.ActualWeather);
-                string wheatherJson = await response.Content.ReadAsStringAsync();
-                CurrentWeather wheatherRecord = JsonConvert.DeserializeObject<CurrentWeather>(wheatherJson);
-                return wheatherRecord;
+                string weatherJson = await response.Content.ReadAsStringAsync();
+                WeatherResponse weatherRecord = JsonConvert.DeserializeObject<WeatherResponse>(weatherJson);
+                return weatherRecord;
             }
         }
 
         /// <summary>
-        /// Gets whether forecast.
+        /// Gets weather forecast.
         /// </summary>
-        /// <returns>Weather record with forecasts.</returns>
-        public async Task<WeatherApiListRecord> GetForecastAsync()
+        /// <returns>Weather record with forecast.</returns>
+        public async Task<WeatherForecastResponse> GetForecastAsync()
         {
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync(WeatherApiUrlConstants.Forecast);
-                string wheatherJson = await response.Content.ReadAsStringAsync();
-                WeatherApiListRecord wheatherRecord = JsonConvert.DeserializeObject<WeatherApiListRecord>(wheatherJson);
-                return wheatherRecord;
+                string weatherJson = await response.Content.ReadAsStringAsync();
+                WeatherForecastResponse weatherApiListRecord = JsonConvert.DeserializeObject<WeatherForecastResponse>(weatherJson);
+                return weatherApiListRecord;
             }
         }
     }

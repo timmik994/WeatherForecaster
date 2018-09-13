@@ -1,4 +1,4 @@
-﻿namespace WheatherForecaster.Services
+﻿namespace WeatherForecaster.Services
 {
     /// <summary>
     /// Urls to weather API.

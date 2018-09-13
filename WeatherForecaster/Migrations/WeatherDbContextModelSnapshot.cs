@@ -3,16 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using WheatherForecaster.Models;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using WeatherForecaster.Models;
 
-namespace WheatherForecaster.Migrations
+namespace WeatherForecaster.Migrations
 {
     [DbContext(typeof(WeatherDbContext))]
-    [Migration("20180909161519_Initial")]
-    partial class Initial
+    partial class WeatherDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,7 +19,7 @@ namespace WheatherForecaster.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("WheatherForecaster.Models.StandartDeviation", b =>
+            modelBuilder.Entity("WeatherForecaster.Models.StandardDeviation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,24 +29,24 @@ namespace WheatherForecaster.Migrations
 
                     b.Property<float>("Deviation");
 
-                    b.Property<int>("HoursForward");
+                    b.Property<int>("ForecastMadeForecastCameTimeDelta");
 
                     b.HasKey("Id");
 
                     b.ToTable("Deviations");
                 });
 
-            modelBuilder.Entity("WhetherForecaster.Models.WheatherRecord", b =>
+            modelBuilder.Entity("WeatherForecaster.Models.WeatherRecord", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<float>("ActualTempreche");
+                    b.Property<float>("ActualTemperature");
 
-                    b.Property<int>("ForecastHours");
+                    b.Property<int>("ForecastMadeForecastCameTimeDelta");
 
-                    b.Property<float>("ForecastTempreche");
+                    b.Property<float>("ForecastTemperature");
 
                     b.Property<DateTime>("ForecastTime");
 
@@ -55,7 +54,7 @@ namespace WheatherForecaster.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WhetherRecords");
+                    b.ToTable("WeatherRecords");
                 });
 #pragma warning restore 612, 618
         }

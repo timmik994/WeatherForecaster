@@ -1,14 +1,14 @@
-﻿namespace WheatherForecaster.Models
+﻿namespace WeatherForecaster.Models
 {
     using System;
 
     /// <summary>
-    /// Data model of weather forecast to return from service.
+    /// Data model of forecasted weather.
     /// </summary>
     public class WeatherViewModel
     {
         /// <summary>
-        /// Gets or sets max temperature using standard deviation.
+        /// Gets or sets max temperature considering standard deviation.
         /// </summary>
         public float MaxTemperature { get; set; }
 
@@ -18,12 +18,12 @@
         public float ActualTemperature { get; set; }
 
         /// <summary>
-        /// Gets or sets min temperature using standard deviation.
+        /// Gets or sets min temperature considering standard deviation.
         /// </summary>
         public float MinTemperature { get; set; }
 
         /// <summary>
-        /// Gets or sets time of forecast.
+        /// Gets or sets time when forecasted weather came.
         /// </summary>
         public DateTime ForecastTime { get; set; }
     }

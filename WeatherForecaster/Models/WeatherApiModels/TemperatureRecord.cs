@@ -1,4 +1,4 @@
-﻿namespace WheatherForecaster.Models.WheatherApiModels
+﻿namespace WeatherForecaster.Models
 {
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
@@ -6,12 +6,12 @@
     /// <summary>
     /// Record of the temperature.
     /// </summary>
-    public class TempechureRecord
+    public class TemperatureRecord
     {
         /// <summary>
         /// Gets or sets temperature.
         /// </summary>
         [JsonProperty("temp")]
-        public float Tempeachure { get; set; }
+        public float Temperature { get; set; }
     }
 }

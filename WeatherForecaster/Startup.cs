@@ -1,4 +1,4 @@
-﻿namespace WhetherForecaster
+﻿namespace WeatherForecaster
 {
     using System;
     using System.Threading.Tasks;
@@ -7,8 +7,8 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using WheatherForecaster.Models;
-    using WheatherForecaster.Services;
+    using WeatherForecaster.Models;
+    using WeatherForecaster.Services;
 
     /// <summary>
     /// Startup class.
@@ -46,9 +46,9 @@
                 options =>
                     options.UseSqlServer(connectionString),
                     ServiceLifetime.Transient);
-            services.AddSingleton<WheatherSaverService>();
-            services.AddSingleton<StandartDeviationUpdater>();
-            services.AddTransient<IStandartDeviationService, StandardDeviationService>();
+            services.AddSingleton<WeatherDataSaverService>();
+            services.AddSingleton<StandardDeviationUpdater>();
+            services.AddTransient<IStandardDeviationService, StandardDeviationService>();
             services.AddTransient<IWeatherService, WeatherService>();
             services.AddMvc();
         }
@@ -77,17 +77,17 @@
         }
 
         /// <summary>
-        /// Runs demon processes.
+        /// Runs background processes.
         /// </summary>
         /// <param name="serviceProvider">Provides of registered services.</param>
         private void RunDeamonProcesses(IServiceProvider serviceProvider)
         {
-            StandartDeviationUpdater updater =
-                (StandartDeviationUpdater)serviceProvider.GetService(typeof(StandartDeviationUpdater));
+            StandardDeviationUpdater updater =
+                (StandardDeviationUpdater)serviceProvider.GetService(typeof(StandardDeviationUpdater));
             Task.Run(() => updater.UpdateDeviation());
-            WheatherSaverService saver =
-                (WheatherSaverService)serviceProvider.GetService(typeof(WheatherSaverService));
-            Task.Run(async () => await saver.SaveWheatherData());
+            WeatherDataSaverService saver =
+                (WeatherDataSaverService)serviceProvider.GetService(typeof(WeatherDataSaverService));
+            Task.Run(async () => await saver.SaveWeatherData());
         }
     }
 }

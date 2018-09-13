@@ -1,12 +1,12 @@
-﻿namespace WheatherForecaster.Models
+﻿namespace WeatherForecaster.Models
 {
     /// <summary>
-    /// City when forecast done.
+    /// The city data.
     /// </summary>
     public class City
     {
         /// <summary>
-        /// Gets or sets id of the city in API service.
+        /// Gets or sets city id.
         /// </summary>
         public int Id { get; set; }
 

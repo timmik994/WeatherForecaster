@@ -1,57 +1,47 @@
-﻿namespace WheatherForecaster.Services
+﻿namespace WeatherForecaster.Services
 {
     using System;
 
     /// <summary>
     /// Helper to work with DateTime.
     /// </summary>
-    public class DateTimeHelper
+    public static class DateTimeHelper
     {
-        /// <summary>
-        /// Seconds in one hour.
-        /// </summary>
-        private const long SecondsInHour = 36000000000;
-
-        /// <summary>
-        /// Time in hours between forecasts.
-        /// </summary>
-        private const int ForecastStep = 3;
-
         /// <summary>
         /// Zero point when UNIX starts calculate time.
         /// </summary>
         private static DateTime unixZeroPoint = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
         /// <summary>
-        /// Gets delta in hours of firstUtcDate and secondUtcDate.
+        /// Gets rounded delta in hours between two dates.
         /// </summary>
-        /// <param name="fromUtcDate">Date from in UTC format.</param>
-        /// <param name="toUtcDate">Date to in UTC format.</param>
+        /// <param name="fromDateTime">Less date.</param>
+        /// <param name="toDateTime">Higher date.</param>
         /// <returns>Delta between dates in hours.</returns>
-        public static int GetDateDeltaInHours(DateTime fromUtcDate, DateTime toUtcDate)
+        public static int GetDeltaInHours(DateTime fromDateTime, DateTime toDateTime)
         {
-            long secondsDelta = toUtcDate.ToFileTime() - fromUtcDate.ToFileTime();
-            float hoursDelta = (float)secondsDelta / (float)DateTimeHelper.SecondsInHour;
-            int trunkedDelta = (int)MathF.Round(hoursDelta);
-            return trunkedDelta;
+            TimeSpan delta = toDateTime - fromDateTime;
+            double doubleDeltaInHours = delta.TotalHours;  
+            int roundedDeltaInHours = (int)Math.Round(doubleDeltaInHours);
+            return roundedDeltaInHours;
         }
 
         /// <summary>
-        /// Calculates forecast time divided on forecast step. 
+        /// Leads delta in hours to value divisible by forecast step size.
         /// </summary>
         /// <param name="deltaHours">Forecast time in hours.</param>
         /// <returns>Forecast time in hours divided by forecast step.</returns>
-        public static int GetForecastHours(int deltaHours)
+        public static int LeadDeltaToValueDivisibleByStep(int deltaHours)
         {
-            int deltaRemainder = deltaHours % DateTimeHelper.ForecastStep;
-            int deltaRemainderLimit = DateTimeHelper.ForecastStep / 2;
+            int deltaRemainder = deltaHours % ForecastConstants.ForecastTimeStep;
+            int deltaRemainderLimit = ForecastConstants.ForecastTimeStep / 2;
             if (deltaRemainder <= deltaRemainderLimit)
             {
                 deltaHours = deltaHours - deltaRemainder;
             }
             else
             {
-                deltaHours = deltaHours - deltaRemainder + DateTimeHelper.ForecastStep;
+                deltaHours = deltaHours - deltaRemainder + ForecastConstants.ForecastTimeStep;
             }
 
             return Math.Abs(deltaHours);

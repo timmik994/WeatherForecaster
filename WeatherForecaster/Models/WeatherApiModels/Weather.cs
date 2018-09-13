@@ -1,24 +1,22 @@
-﻿namespace WheatherForecaster.Models
+﻿namespace WeatherForecaster.Models
 {
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Serialization;
-    using WheatherForecaster.Models.WheatherApiModels;
 
     /// <summary>
-    /// Whether record from API.
+    /// Current weather API response.
     /// </summary>
-    public class Wheather
+    public class WeatherResponse
     {
         /// <summary>
-        /// Gets or sets UTC foretasted time.
+        /// Gets or sets time and data when weather came in UNIX format.
         /// </summary>
         [JsonProperty("dt")]
-        public long UtcDateTime { get; set; }
+        public long DateTime { get; set; }
 
         /// <summary>
-        /// Gets or sets temperature in Celsius.
+        /// Gets or sets temperature.
         /// </summary>
         [JsonProperty("main")]
-        public TempechureRecord Tempreachure { get; set; }
+        public TemperatureRecord TemperatureRecord { get; set; }
     }
 }
